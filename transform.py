@@ -51,7 +51,7 @@ def transform(file_path,lag):
     df = df.drop(columns=['llagh', 'llagv'])
 
     # Drop every 5 rounds of each season
-    df=df[df['round']>5]
+    df=df[df['round']>lag]
 
     # Printing new columns names as a check
     print(f"After this data change, we now have {df.shape[1]} columns : {list(df.columns)}")
