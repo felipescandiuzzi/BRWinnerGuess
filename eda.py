@@ -40,7 +40,7 @@ def read_treat_csv(file_path):
 
     #Creating winner column
 
-    df["winner"]=np.where(df['goalsht']>df['goalsvt'],'Home',np.where(df['goalsht']<df['goalsvt'],'Away','Draw'))
+    df["hresult"]=np.where(df['goalsht']>df['goalsvt'],'W',np.where(df['goalsht']<df['goalsvt'],'L','D'))
     print(df.head(5))
 
     # Histogram to goalsht
