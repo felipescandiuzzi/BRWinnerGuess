@@ -41,8 +41,7 @@ def read_treat_csv(file_path):
     #Creating winner column
 
     df["hresult"]=np.where(df['goalsht']>df['goalsvt'],'W',np.where(df['goalsht']<df['goalsvt'],'L','D'))
-    print(df.head(5))
-
+    
     # Histogram to goalsht
     plt.figure(figsize=(8, 6))
     sns.histplot(df['goalsht'].dropna(), kde=True)

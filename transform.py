@@ -50,6 +50,12 @@ def transform(file_path,lag):
     # Drop intermediate columns
     df = df.drop(columns=['llagh', 'llagv'])
 
-    print(df.head(5))
+    # Drop every 5 rounds of each season
+    df=df[df['round']>5]
 
-transform('data.csv',lag=5)
+    # Printing new columns names as a check
+    print(f"After this data change, we now have {df.shape[1]} columns : {list(df.columns)}")
+
+    return df
+
+    #transform('data.csv',lag=5)
