@@ -1,53 +1,58 @@
-#Importing required libraries
+def read_treat_csv(file_path):
+    '''Function that gets the path of the csv file and returns
+    the dataframe all cleaned and treated, at the same time it 
+    prints the main exploratory analysis'''
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+    #Importing required libraries
 
-#Reading dataframe
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import seaborn as sns
 
-df = pd.read_csv("data.csv",encoding='utf-8')
+    #Reading dataframe
 
-#Getting first samples
+    df = pd.read_csv(file_path,encoding='utf-8')
 
-print(f"First Samples:\n {df.head(5)} \n")
+    #Getting first samples
 
-#Getting df info
+    print(f"First Samples:\n {df.head(5)} \n")
 
-print(f"df Info:\n {df.info()} \n")
+    #Getting df info
 
-#Getting df description
+    print(f"df Info:\n {df.info()} \n")
 
-print(f"df Description:\n {df.describe()} \n")
+    #Getting df description
 
-#Getting null values (if any)
+    print(f"df Description:\n {df.describe()} \n")
 
-print(f"Checking for null values: \n {df.isnull().sum().max()} occurence(s) \n")
+    #Getting null values (if any)
 
-#Removing null values
+    print(f"Checking for null values: \n {df.isnull().sum().max()} occurence(s) \n")
 
-df = df.dropna()
+    #Removing null values
 
-#Checking null values after dropna
+    df = df.dropna()
 
-print(f"After treatment, we now have {df.isnull().sum().max()} occurrence(s) \n")
+    #Checking null values after dropna
 
-#Creating winner column
+    print(f"After treatment, we now have {df.isnull().sum().max()} occurrence(s) \n")
 
-df["winner"]=np.where(df['goalsht']>df['goalsvt'],'Home',np.where(df['goalsht']<df['goalsvt'],'Away','Draw'))
-print(df.head(5))
+    #Creating winner column
 
-# Histogram to goalsht
-plt.figure(figsize=(8, 6))
-sns.histplot(df['goalsht'].dropna(), kde=True)
-plt.title('Home Team Goals')
-#plt.show()
+    df["winner"]=np.where(df['goalsht']>df['goalsvt'],'Home',np.where(df['goalsht']<df['goalsvt'],'Away','Draw'))
+    print(df.head(5))
 
-# Histogram to goalsvt
-plt.figure(figsize=(8, 6))
-sns.histplot(df['goalsvt'].dropna(), kde=True)
-plt.title('Visiting Team Goals')
-#plt.show()
+    # Histogram to goalsht
+    plt.figure(figsize=(8, 6))
+    sns.histplot(df['goalsht'].dropna(), kde=True)
+    plt.title('Home Team Goals')
+    #plt.show()
 
-df['winner'].hist(by=df['season'])
+    # Histogram to goalsvt
+    plt.figure(figsize=(8, 6))
+    sns.histplot(df['goalsvt'].dropna(), kde=True)
+    plt.title('Visiting Team Goals')
+    #plt.show()
+
+    return df
